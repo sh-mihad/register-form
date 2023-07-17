@@ -20,6 +20,9 @@ const Table = ({ setEditMode }) => {
       <table style={tableStyle}>
         <thead>
           <tr>
+            <th style={cellStyle}>
+              <input type="checkbox" />
+            </th>
             <th style={cellStyle}>Name</th>
             <th style={cellStyle}>Email</th>
             <th style={cellStyle}>Password</th>

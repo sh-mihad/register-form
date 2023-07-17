@@ -17,21 +17,11 @@ export const formDataSlice = createSlice({
            state.initData = existingNewData;
         },
         editData : (state,action)=>{   
-       
+            const targetIndex = state.findIndex((element) => element.id === action?.payload?.id);
+            state.initData[targetIndex] = action.payload
             // const findData = state.initData.find(data=>data.id === action.payload.id);
-            const updatedArry = state.initData.map(data=>{
-                if(data.id === action.payload.id){
-                    return {
-                        ...data,
-                        fullName : action.payload.fullName,
-                        email : action.payload.email,
-                        password : action.payload.password,
-                        confirmPassword:action.payload.confirmPassword,
-                        phoneNumber : action.payload.phoneNumber
-                    }
-                }
-            })
-            state.initData = updatedArry;
+           
+            
                         
         }
     }

@@ -23,6 +23,9 @@ const TableItem = ({ tItem, setEditMode }) => {
   };
   return (
     <tr>
+      <td style={cellStyle}>
+        <input type="checkbox" />
+      </td>
       <td style={cellStyle}>{fullName}</td>
       <td style={cellStyle}>{email}</td>
       <td style={cellStyle}>{password}</td>

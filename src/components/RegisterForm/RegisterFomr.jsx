@@ -1,12 +1,10 @@
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { addData, editData } from "../../features/formData/formDataSlice";
 import { randomId } from "../../utilites/randomId";
 import Table from "../Table/Table";
 const RegisterForm = () => {
-  const [editMode, setEditMode] = useState("");
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -17,27 +15,11 @@ const RegisterForm = () => {
       phoneNumber: "",
     },
     onSubmit: (values) => {
-      if (editMode) {
-        const userData = {
-          id: editMode.id,
-          fullName: values.fullName,
-          email: values.email,
-          password: values.password,
-          confirmPassword: values.confirmPassword,
-          phoneNumber: values.phoneNumber,
-        };
-        dispatch(editData(userData));
+      if (values?.id) {
+        dispatch(editData(values));
         formik.resetForm();
       } else {
-        const userData = {
-          id: randomId(),
-          fullName: values.fullName,
-          email: values.email,
-          password: values.password,
-          confirmPassword: values.confirmPassword,
-          phoneNumber: values.phoneNumber,
-        };
-        dispatch(addData(userData));
+        dispatch(addData({ ...values, id: randomId() }));
         formik.resetForm();
       }
     },
@@ -59,11 +41,7 @@ const RegisterForm = () => {
     }),
   });
 
-  useEffect(() => {
-    if (editMode) {
-      formik.setValues(editMode);
-    }
-  }, [editMode]);
+  console.log("values", formik.values);
 
   return (
     <div>
@@ -175,7 +153,7 @@ const RegisterForm = () => {
           </button>
         </form>
       </div>
-      <Table setEditMode={setEditMode} />
+      <Table setEditMode={formik.setValues} />
     </div>
   );
 };

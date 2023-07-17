@@ -1,7 +1,11 @@
-import "./App.css";
+import RegisterFomr from "./components/RegisterForm/RegisterFomr";
 
 function App() {
-  return <div>hello</div>;
+  return (
+    <>
+      <RegisterFomr />
+    </>
+  );
 }
 
 export default App;

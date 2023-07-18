@@ -36,9 +36,13 @@ export const formDataSlice = createSlice({
            }
          })
          state.initData = data;
+        },
+        changePassword : (state,action)=>{
+            const targetedId = state.initData?.findIndex(element=>element.id === action.payload.id)
+           state.initData[targetedId].password = action.payload.value;
         }
     }
 })
 
-export const {addData,removeData,editData,checkedAction,allCheckedAction} = formDataSlice.actions
+export const {addData,removeData,editData,checkedAction,allCheckedAction,changePassword} = formDataSlice.actions
 export default formDataSlice.reducer

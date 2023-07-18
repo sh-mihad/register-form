@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import {
+  changePassword,
   checkedAction,
   removeData,
 } from "../../features/formData/formDataSlice";
@@ -36,7 +37,18 @@ const TableItem = ({ tItem, setEditMode }) => {
       </td>
       <td style={cellStyle}>{fullName}</td>
       <td style={cellStyle}>{email}</td>
-      <td style={cellStyle}>{password}</td>
+      <td style={cellStyle}>
+        <input
+          type="text"
+          value={password}
+          className="border"
+          onChange={(e) =>
+            dispatch(changePassword({ value: e.target.value, id }))
+          }
+          name=""
+          id=""
+        />
+      </td>
       <td style={cellStyle}>{phoneNumber}</td>
       <td style={cellStyle}>
         <button

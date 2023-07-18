@@ -17,15 +17,28 @@ export const formDataSlice = createSlice({
            state.initData = existingNewData;
         },
         editData : (state,action)=>{   
-            const targetIndex = state.findIndex((element) => element.id === action?.payload?.id);
-            state.initData[targetIndex] = action.payload
-            // const findData = state.initData.find(data=>data.id === action.payload.id);
-           
-            
-                        
+            const targetIndex = state?.initData?.findIndex((element) => element.id === action?.payload?.id);
+            state.initData[targetIndex] = action.payload                        
+        },
+        checkedAction : (state,action)=>{
+            const targetIndex = state?.initData?.findIndex((element) => element.id === action?.payload);
+            const data = [...state.initData]
+            data[targetIndex]["isSelected"] = ! data[targetIndex]["isSelected"]
+            state.initData = data
+        },
+        allCheckedAction : (state,action)=>{
+         const data = [...state.initData]
+         data?.map(element=>{
+           if(action.payload){
+            element.isSelected = true
+           }else{
+            element.isSelected = false
+           }
+         })
+         state.initData = data;
         }
     }
 })
 
-export const {addData,removeData,editData} = formDataSlice.actions
+export const {addData,removeData,editData,checkedAction,allCheckedAction} = formDataSlice.actions
 export default formDataSlice.reducer

@@ -19,7 +19,7 @@ const RegisterForm = () => {
         dispatch(editData(values));
         formik.resetForm();
       } else {
-        dispatch(addData({ ...values, id: randomId() }));
+        dispatch(addData({ ...values, id: randomId(), isSelected: false }));
         formik.resetForm();
       }
     },
@@ -41,7 +41,7 @@ const RegisterForm = () => {
     }),
   });
 
-  console.log("values", formik.values);
+  // console.log("values", formik.values);
 
   return (
     <div>

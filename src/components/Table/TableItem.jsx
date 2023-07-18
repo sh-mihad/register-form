@@ -1,10 +1,14 @@
 import { useDispatch } from "react-redux";
-import { removeData } from "../../features/formData/formDataSlice";
+import {
+  checkedAction,
+  removeData,
+} from "../../features/formData/formDataSlice";
 
 // eslint-disable-next-line react/prop-types
 const TableItem = ({ tItem, setEditMode }) => {
   // console.log(tItem);
-  const { id, fullName, email, password, phoneNumber } = tItem || {};
+  const { id, fullName, email, password, phoneNumber, isSelected } =
+    tItem || {};
 
   const dispatch = useDispatch();
   const handleDelete = (id) => {
@@ -24,7 +28,11 @@ const TableItem = ({ tItem, setEditMode }) => {
   return (
     <tr>
       <td style={cellStyle}>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          checked={isSelected}
+          onChange={() => dispatch(checkedAction(id))}
+        />
       </td>
       <td style={cellStyle}>{fullName}</td>
       <td style={cellStyle}>{email}</td>
